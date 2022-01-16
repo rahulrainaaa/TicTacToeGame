@@ -1,6 +1,5 @@
 package demo.mygame.tictactoe
 
-import android.widget.Space
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -80,6 +79,7 @@ fun DrawBottomAppBar(viewModel: MainViewModel) {
         cutoutShape = CutCornerShape(size = 12.dp)
     ) {
         Row {
+            Spacer(modifier = Modifier.width(8.dp))
             Icon(Icons.Default.Settings, contentDescription = "Settings", Modifier.clickable {
                 viewModel.showSettingsDialog.value = true
             })
@@ -159,51 +159,41 @@ fun DrawSettingsDialog(viewModel: MainViewModel) {
             .background(color = Color.White, shape = RoundedCornerShape(8.dp))
     ) {
 
-        val (cLabel, cLabelPlayer, cTextPlayer, cLabelBlockSize, cTextBlockSize, cBtnSave, cBtnDismiss) = createRefs()
+        val (cLabel, cTextPlayer, cTextBlockSize, cBtnSave, cBtnDismiss) = createRefs()
 
         Text(
-            text = "Setting",
+            text = "Game Level",
             modifier = Modifier.constrainAs(cLabel) {
-                top.linkTo(anchor = parent.top, margin = 8.dp)
-                start.linkTo(anchor = parent.start, margin = 8.dp)
+                top.linkTo(anchor = parent.top, margin = 16.dp)
+                start.linkTo(anchor = parent.start, margin = 16.dp)
                 height = Dimension.wrapContent
-                width = Dimension.matchParent
+                width = Dimension.wrapContent
             },
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
             fontFamily = FontFamily.SansSerif
         )
 
-        Text(text = "Total Players:",
-            modifier = Modifier.constrainAs(cLabelPlayer) {
-                start.linkTo(anchor = parent.start, margin = 8.dp)
-                top.linkTo(anchor = cLabel.bottom, margin = 8.dp)
-            })
-
         var totalPlayers by remember { mutableStateOf(viewModel.totalPlayers.value.toString()) }
         OutlinedTextField(
             value = totalPlayers,
             onValueChange = { totalPlayers = it },
+            label = { Text("Total Players (Min:2, Max:4)") },
             keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
             modifier = Modifier.constrainAs(cTextPlayer) {
-                top.linkTo(anchor = cLabelPlayer.bottom)
+                top.linkTo(anchor = cLabel.bottom, margin = 16.dp)
                 start.linkTo(anchor = parent.start, margin = 8.dp)
                 end.linkTo(anchor = parent.end, margin = 8.dp)
-            })
-
-        Text(text = "Block Size:",
-            modifier = Modifier.constrainAs(cLabelBlockSize) {
-                start.linkTo(anchor = parent.start, margin = 8.dp)
-                top.linkTo(anchor = cTextPlayer.bottom, margin = 8.dp)
             })
 
         var totalBlockSize by remember { mutableStateOf(viewModel.matrixSize.value.toString()) }
         OutlinedTextField(
             value = totalBlockSize,
             onValueChange = { totalBlockSize = it },
+            label = { Text("Total Blocks (Min:3, Max:12)") },
             keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
             modifier = Modifier.constrainAs(cTextBlockSize) {
-                top.linkTo(anchor = cLabelBlockSize.bottom)
+                top.linkTo(anchor = cTextPlayer.bottom, margin = 8.dp)
                 start.linkTo(anchor = parent.start, margin = 8.dp)
                 end.linkTo(anchor = parent.end, margin = 8.dp)
             })

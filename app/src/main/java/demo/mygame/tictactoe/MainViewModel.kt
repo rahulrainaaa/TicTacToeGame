@@ -14,7 +14,7 @@ class MainViewModel : ViewModel() {
     val highlight = mutableStateListOf<Int>()
     var matrixArray = mutableStateListOf<Player>()
     val currentPlayer = mutableStateOf(Player.NONE)
-    val showSettingsDialog = mutableStateOf(false)
+    val showSettingsDialog = mutableStateOf(true)
     val totalPlayers = mutableStateOf(2)
 
     fun saveSettings(size: String, players: String) {
