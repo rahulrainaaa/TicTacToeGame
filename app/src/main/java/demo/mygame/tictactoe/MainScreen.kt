@@ -140,7 +140,7 @@ fun DrawSingleCell(viewModel: MainViewModel, position: Int, onClick: () -> Unit)
         player.label?.let {
             Text(
                 text = it,
-                fontStyle = FontStyle.Italic,
+                fontStyle = FontStyle.Normal,
                 fontWeight = FontWeight.Light,
                 fontSize = 10.sp,
                 fontFamily = FontFamily.Cursive,
