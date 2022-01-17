@@ -73,7 +73,7 @@ class MainViewModel : ViewModel() {
                 if (Arr[(i * size) + i].code != player.code) d1 = false
             } else d1 = false
             if ((x + y) == (size - 1) && d2) {
-                if (Arr[(size * i) + size].code != player.code) d2 = false
+                if (Arr[((size-1) * i) + (size-1)].code != player.code) d2 = false
             } else d2 = false
         }
 
@@ -91,7 +91,7 @@ class MainViewModel : ViewModel() {
         }
         if (d2) {
             for (i in 0 until size)
-                highlight.add((size * i) + size)
+                highlight.add(((size-1) * i) + (size-1))
         }
 
         return h || v || d1 || d2
